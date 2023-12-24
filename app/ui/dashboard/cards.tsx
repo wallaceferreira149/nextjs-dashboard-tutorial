@@ -1,3 +1,5 @@
+import { fetchCardData } from '@/app/lib/data';
+
 import { lusitana } from '@/app/ui/fonts';
 import {
   BanknotesIcon,
@@ -13,22 +15,28 @@ const iconMap = {
   invoices: InboxIcon,
 };
 
-// export default async function CardWrapper() {
-//   return (
-//     <>
-//       {/* NOTE: comment in this code when you get to this point in the course */}
+export default async function CardWrapper() {
+  const {
+    numberOfCustomers,
+    numberOfInvoices,
+    totalPaidInvoices,
+    totalPendingInvoices
+  } = await fetchCardData();
+  return (
+    <>
+      {/* NOTE: comment in this code when you get to this point in the course */}
 
-//       <Card title="Collected" value={totalPaidInvoices} type="collected" />
-//       <Card title="Pending" value={totalPendingInvoices} type="pending" />
-//       <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
-//       <Card
-//         title="Total Customers"
-//         value={numberOfCustomers}
-//         type="customers"
-//       />
-//     </>
-//   );
-// }
+      <Card title="Collected" value={totalPaidInvoices} type="collected" />
+      <Card title="Pending" value={totalPendingInvoices} type="pending" />
+      <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
+      <Card
+        title="Total Customers"
+        value={numberOfCustomers}
+        type="customers"
+      />
+    </>
+  );
+}
 
 export function Card({
   title,
@@ -56,3 +64,8 @@ export function Card({
     </div>
   );
 }
+
+// function fetchCardData(): { numberOfCustomers: any; numberOfInvoices: any; totalPaidInvoices: any; totalPendingInvoices: any; } | PromiseLike<{ numberOfCustomers: any; numberOfInvoices: any; totalPaidInvoices: any; totalPendingInvoices: any; }> {
+//   throw new Error('Function not implemented.');
+// }
+
